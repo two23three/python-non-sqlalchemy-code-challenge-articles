@@ -43,7 +43,7 @@ class Author:
         articles = Article(self, magazine, title)
         return articles
    
-    # Method to get all unique topic areas (categories) of magazines the author has written for
+    # Method to get all unique  categories of magazines the author has written for
     def topic_areas(self):
         return list(set([article.magazine.category for article in self.articles()])) if self.articles() else None
 
@@ -92,14 +92,28 @@ class Magazine:
               authors[article.author] = 1
       contributing_authors = [author for author, count in authors.items() if count >= 2]
       return contributing_authors if contributing_authors else None
+    
 
+    @staticmethod
+    def top_publisher():
+        if Article.all:
+            magazine_article_count = {}
+            for article in Article.all:
+                magazine = article.magazine
+                if magazine in magazine_article_count:
+                    magazine_article_count[magazine] += 1
+                else:
+                    magazine_article_count[magazine] = 1
+            return max(magazine_article_count, key=magazine_article_count.get)
+        return None
 
+    
 
 
 # Create instances of authors
-author1 = Author("John Doe")
-author2 = Author("Jane Smith")
-author3 = Author("Alice Johnson")
+author1 = Author("Tulley Mwenda")
+author2 = Author("Maureen Murimi")
+author3 = Author("Victor ")
 
 # Create instances of magazines
 magazine1 = Magazine("Science Today", "Science")
@@ -107,13 +121,13 @@ magazine2 = Magazine("Tech News", "Technology")
 
 # Add articles to the magazines
 author1.add_article(magazine1, "The Latest Discoveries in Physics")
-author1.add_article(magazine2, "Advancements in Artificial Intelligence")
-author2.add_article(magazine1, "The Future of Space Exploration")
-author3.add_article(magazine1, "Understanding Quantum Mechanics")
+author1.add_article(magazine2, "Advancements in Cancer Treatment")
+author2.add_article(magazine1, "The Future of Deep sea Exploration")
+author3.add_article(magazine1, "Understanding Mechanics")
 author3.add_article(magazine2, "The Rise of Cybersecurity")
 # Add more articles to Magazine 1 by existing authors
-author1.add_article(magazine1, "New Developments in Astrophysics")
-author2.add_article(magazine1, "Exploring Mars: Recent Findings")
+author1.add_article(magazine1, "New Developments in Tech")
+author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
 
 contributing_authors = magazine1.contributing_authors()
 
@@ -124,3 +138,11 @@ if contributing_authors:
 else:
     print("No authors found who have written more than two articles for Magazine 1")
 
+top_publisher = Magazine.top_publisher()
+
+# Print information about the top publisher
+if top_publisher:
+    print(f"The Magazine with the most articles is: {top_publisher.name}")
+    print(f"Category: {top_publisher.category}")
+else:
+    print("No articles found.")
