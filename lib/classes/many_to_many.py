@@ -10,10 +10,11 @@ class Article:
     @property
     def title(self):
         return self._title
-
+    # Setter for the title attribute with validation
     @title.setter
     def title(self, title):
-        return self.title
+         if isinstance(title, str):
+            self._title = title
         
      
 
@@ -29,22 +30,24 @@ class Author:
     def name(self, new_names):
         self.new_names = new_names
         return self._name
-
+    # Method to get all articles written by the author
     def articles(self):
         return [articles for articles in Article.all if articles.author == self]
 
+    # Method to get all unique magazines the author has contributed to
     def magazines(self):
         return list(set([article.magazine for article in self.articles()]))
-
+    
+    # Method to add a new article for the author
     def add_article(self, magazine, title):
         articles = Article(self, magazine, title)
         return articles
-
+   
+    # Method to get all unique topic areas (categories) of magazines the author has written for
     def topic_areas(self):
         return list(set([article.magazine.category for article in self.articles()])) if self.articles() else None
 
-    def contributing_authors(self):
-        return [authors for authors in Author.all if len(authors.articles()) > 0]
+   
 
 class Magazine:
     def __init__(self, name, category):
@@ -59,19 +62,16 @@ class Magazine:
     def category(self):
         return self._category
     
+    # Setter for the name attribute with validation
     @name.setter
-    def name(self, new_names):
-        if isinstance(new_names, str):
-            if 2 <= len(new_names) <= 16:
-                self._name = new_names
-        return self._name
-    
+    def name(self, new_name):
+        if isinstance(new_name, str) and 2 <= len(new_name) <= 16:
+            self._name = new_name
+   
     @category.setter
-    def category(self, new_categories):
-        if isinstance(new_categories, str):
-            if len(new_categories) > 0:
-                self._category = new_categories
-        return self._category
+    def category(self, new_category):
+      if isinstance(new_category, str) and len(new_category) > 0:
+            self._category = new_category
     
     def articles(self):
         return [articles for articles in Article.all if articles.magazine == self]
