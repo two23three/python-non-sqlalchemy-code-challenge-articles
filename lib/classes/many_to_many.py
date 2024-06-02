@@ -84,26 +84,38 @@ class Magazine:
         return titles if titles else None
    
     def contributing_authors(self):
+     #initialise an empty dictionary
       authors = {}
+      # iterate over articles of teh current magazine
       for article in self.articles():
+          #check if the author is already in the dictionary
           if article.author in authors:
+              #increase the count
               authors[article.author] += 1
           else:
               authors[article.author] = 1
+      #create a list of authors who have written more than 2 articles
       contributing_authors = [author for author, count in authors.items() if count >= 2]
       return contributing_authors if contributing_authors else None
     
-
+   
     @staticmethod
     def top_publisher():
+       #check if there are any articles
         if Article.all:
+            #initialise an empty dictionary
             magazine_article_count = {}
+            # iterate over articles
             for article in Article.all:
+                #get the magazine of the article 
                 magazine = article.magazine
+                #check if the magazine is already in the dictionary
                 if magazine in magazine_article_count:
+                    #increase the count
                     magazine_article_count[magazine] += 1
                 else:
-                    magazine_article_count[magazine] = 1
+                   magazine_article_count[magazine] = 1
+           # return the magazine with the most articles
             return max(magazine_article_count, key=magazine_article_count.get)
         return None
 
