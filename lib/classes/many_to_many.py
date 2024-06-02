@@ -136,7 +136,7 @@ author1.add_article(magazine1, "The Latest Discoveries in Physics")
 author1.add_article(magazine2, "Advancements in Cancer Treatment")
 author2.add_article(magazine1, "The Future of Deep sea Exploration")
 author3.add_article(magazine1, "Understanding Mechanics")
-author3.add_article(magazine2, "The Rise of Cybersecurity")
+author3.add_article(magazine2, "The Rise of Cybercrime")
 # Add more articles to Magazine 1 by existing authors
 author1.add_article(magazine1, "New Developments in Tech")
 author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
@@ -144,7 +144,7 @@ author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
 contributing_authors = magazine1.contributing_authors()
 
 if contributing_authors:
-    print("Authors who have written more than two articles for Magazine 1:")
+    print("Authors who have written more than two articles for Magazine one:")
     for author in contributing_authors:
         print(author.name)
 else:
