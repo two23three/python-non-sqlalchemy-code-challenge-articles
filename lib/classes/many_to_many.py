@@ -179,6 +179,9 @@ author3.add_article(magazine2, "The Rise of Cybercrime")
 author1.add_article(magazine1, "New Developments in Tech")
 author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
 
+article1 = Article(author1, magazine1, "Codility shocks people")
+print(article1.title)
+
 contributing_authors = magazine1.contributing_authors()
 
 if contributing_authors:
