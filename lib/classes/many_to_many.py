@@ -13,17 +13,35 @@ class Article:
     # Setter for the title attribute with validation
     @title.setter
     def title(self, title):
-        if hasattr(self, "title"):
-            AttributeError("Title cannot be changed")
+       if hasattr(self,"title"):AttributeError("Title cannot be changed")
+       else:
+            if isinstance(title,str):
+                if 5<=len(title)<=50:
+                    self._title=title
+                else:ValueError("Title must be between 5 and 50 characheters")
+            else:TypeError("Title must be a string")
+  
+    @property
+    def author(self):
+        return self._author
+
+    @property
+    def magazine(self):
+        return self._magazine
+
+    @author.setter
+    def author(self, author):
+        if isinstance(author, Author):
+            self._author = author
         else:
-            if isinstance(title, str):
-                if 5 <= len(title) <= 50:
-                    self._title = title
-                else:
-                    ValueError("Title must be between 5 and 50 characters")
-            else:
-                TypeError("Title must be a string")
-        
+            raise TypeError("Author must be of type Author")
+    
+    @magazine.setter
+    def magazine(self, magazine):
+        if isinstance(magazine, Magazine):
+            self._magazine = magazine
+        else:
+            raise TypeError("Magazine must be of type Magazine")
      
 
 class Author:
@@ -178,3 +196,4 @@ if top_publisher:
     print(f"Category: {top_publisher.category}")
 else:
     print("No articles found.")
+    
