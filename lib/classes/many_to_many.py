@@ -45,9 +45,12 @@ class Article:
      
 
 class Author:
+
+    all = []
     def __init__(self, name):
         self._name = name
-
+        Author.all.append(self)
+    
     @property
     def name(self):
         return self._name
@@ -72,6 +75,11 @@ class Author:
     # Method to get all unique  categories of magazines the author has written for
     def topic_areas(self):
         return list(set([article.magazine.category for article in self.articles()])) if self.articles() else None
+
+
+    @staticmethod
+    def list_authors():
+        return [author.name for author in Author.all]
 
    
 
@@ -166,15 +174,15 @@ author2 = Author("Maureen Murimi")
 author3 = Author("Victor ")
 
 # Create instances of magazines
-magazine1 = Magazine("Science Today", "Science")
-magazine2 = Magazine("Tech News", "Technology")
+magazine1 = Magazine("Techcrunch", "Science")
+magazine2 = Magazine("fashion baze", "Lifestyle")
 
 # Add articles to the magazines
-author1.add_article(magazine1, "The Latest Discoveries in Physics")
-author1.add_article(magazine2, "Advancements in Cancer Treatment")
+author1.add_article(magazine1, "The  Advancements in molecular structure")
+author1.add_article(magazine2, "PRADAS SPRING ROLOUTS")
 author2.add_article(magazine1, "The Future of Deep sea Exploration")
-author3.add_article(magazine1, "Understanding Mechanics")
-author3.add_article(magazine2, "The Rise of Cybercrime")
+author3.add_article(magazine1, "Understanding Robotics in the 21st century")
+author3.add_article(magazine2, "Carrara Marble is so 2020")
 # Add more articles to Magazine 1 by existing authors
 author1.add_article(magazine1, "New Developments in Tech")
 author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
@@ -199,4 +207,17 @@ if top_publisher:
     print(f"Category: {top_publisher.category}")
 else:
     print("No articles found.")
+
+#list of authors
+print(Author.list_authors())
+
+# List of articles for each author and the magazines they wrote for
+for author in Author.all:
+    print(f"Author: {author.name}")
+    for article in author.articles():
+        print(f" - Article: {article.title}, Magazine: {article.magazine.name}")
+
+
+
+
     
