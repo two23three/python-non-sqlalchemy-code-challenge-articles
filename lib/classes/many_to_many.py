@@ -105,6 +105,7 @@ class Magazine:
         if Article.all:
             #initialise an empty dictionary
             magazine_article_count = {}
+            
             # iterate over articles
             for article in Article.all:
                 #get the magazine of the article 
@@ -115,6 +116,7 @@ class Magazine:
                     magazine_article_count[magazine] += 1
                 else:
                    magazine_article_count[magazine] = 1
+            
            # return the magazine with the most articles
             return max(magazine_article_count, key=magazine_article_count.get)
         return None
@@ -148,7 +150,7 @@ if contributing_authors:
     for author in contributing_authors:
         print(author.name)
 else:
-    print("No authors found who have written more than two articles for Magazine 1")
+    print("No authors found who have written more than two articles for Magazine1")
 
 top_publisher = Magazine.top_publisher()
 
