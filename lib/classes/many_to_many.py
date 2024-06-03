@@ -185,7 +185,7 @@ author3.add_article(magazine1, "Understanding Robotics in the 21st century")
 author3.add_article(magazine2, "Carrara Marble is so 2020")
 # Add more articles to Magazine 1 by existing authors
 author1.add_article(magazine1, "New Developments in Tech")
-author2.add_article(magazine1, "Exploring Oceans: Recent Findings")
+author2.add_article(magazine1, "Exploring Artificial intelligence ")
 
 article1 = Article(author1, magazine1, "Codility shocks people")
 print(article1.title)
