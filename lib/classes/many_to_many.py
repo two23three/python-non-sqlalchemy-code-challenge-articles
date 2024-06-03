@@ -13,8 +13,16 @@ class Article:
     # Setter for the title attribute with validation
     @title.setter
     def title(self, title):
-         if isinstance(title, str):
-            self._title = title
+        if hasattr(self, "title"):
+            AttributeError("Title cannot be changed")
+        else:
+            if isinstance(title, str):
+                if 5 <= len(title) <= 50:
+                    self._title = title
+                else:
+                    ValueError("Title must be between 5 and 50 characters")
+            else:
+                TypeError("Title must be a string")
         
      
 
@@ -65,13 +73,23 @@ class Magazine:
     # Setter for the name attribute with validation
     @name.setter
     def name(self, new_name):
-        if isinstance(new_name, str) and 2 <= len(new_name) <= 16:
-            self._name = new_name
+        if isinstance(new_name, str):
+            if 2 <= len(new_name) <= 16:
+                self._name = new_name
+            else: 
+                ValueError("Name must be between 2 and 16 characters")
+        else:
+            TypeError("Name must be a string")   
    
     @category.setter
     def category(self, new_category):
-      if isinstance(new_category, str) and len(new_category) > 0:
-            self._category = new_category
+        if isinstance(new_category, str):
+            if len(new_category):
+                self._category = new_category
+            else:
+                ValueError("Category must be longer than 0 characters")
+        else:
+            TypeError("Category must be a string")
     
     def articles(self):
         return [articles for articles in Article.all if articles.magazine == self]
